@@ -56,27 +56,25 @@ end
 
 # run game 12 times
 code = create_code
-p code
+victory = false
 
 12.times do
   guess = make_guess
   color = count_color(guess, code)
-  puts "color: #{color}"
   white = count_white(guess, code)
-  puts "white: #{white}"
   blank = count_blank(guess, code)
-  puts "blank: #{blank}"
   total = color + white + blank
-  puts "total: #{total}"
   diff = total - 4
-  puts "diff: #{diff}"
   white -= diff
-  puts "new white: #{white}"
   color.times { print '* ' if color.positive? }
   white.times { print '_ ' if white.positive? }
   puts ''
   if color == 4
     puts 'Correct!'
+    victory = true
     break
   end
 end
+
+puts "Sorry, you didn't guess the code." if victory == false
+puts "The code was #{code.join}"
